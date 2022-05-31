@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -f "/tmp/keyboard-toggle" ]; then
+    rm -f /tmp/keyboard-toggle
+    export KEYBOARD="workman"
+    setxkbmap -layout "us" -variant "workman"
+else
+    touch /tmp/keyboard-toggle
+    export KEYBOARD="us"
+    setxkbmap -layout "us"
+fi

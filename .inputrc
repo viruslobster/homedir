@@ -1,0 +1,15 @@
+set editing-mode vi
+
+# vi settings
+$if mode=vi
+    # normal mode
+    set keymap vi-command
+    "e": history-substring-search-backward
+    "y": backward-char
+    "o": forward-char
+    "n": history-substring-search-forward
+    # insert mode
+    set keymap vi-insert
+    "\C-n": vi-movement-mode # remap escape
+$endif
+
