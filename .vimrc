@@ -1,36 +1,19 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'fatih/vim-go'
-Plugin 'wincent/command-t'
-Plugin 'plan9-for-vimspace/acme-colors'
 Plugin 'tpope/vim-sleuth'
+Plugin 'fatih/vim-go'
+Plugin 'plan9-for-vimspace/acme-colors'
+Plugin 'viruslobster/justtxt'
 
-
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
+" b/c I learned the wrong keyboard layout
 nnoremap l o
 vnoremap l o
 nnoremap o l
@@ -60,25 +43,66 @@ nnoremap y h
 vnoremap y h
 nnoremap H Y
 nnoremap Y H
-
 nnoremap <C-y> <C-w>h
 nnoremap <C-n> <C-w>j
 nnoremap <C-e> <C-w>k
 nnoremap <C-o> <C-w>l
 
-syntax enable
-filetype indent plugin on
-set modeline
-set number
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set viminfo='100,<1000,s100,h
+" Higlight lines that are too long
+"highlight OverLength ctermbg=red ctermfg=white guibg=#
+"match OverLength /\%81v.\+/
+"augroup vimrc_autocmds
+"  autocmd BufEnter * highlight OverLength ctermbg=red guibg=darkgrey
+"  autocmd BufEnter * match OverLength /\%81v.*/
+"augroup END
 
+" Eliminate tabs
+" used `:retab` fix
+" set smartindent
+set shiftwidth=4
+set tabstop=4
+set expandtab
+syn match tab display "\t"
+hi link tab Error
+
+nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
+nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+
+" Display line numbers
+set nu
+
+" syntax for weird fb file extenstions
+au BufRead,BufNewFile *.cinc set filetype=python
+au BufRead,BufNewFile *.cconf set filetype=python
+au BufRead,BufNewFile *.mcconf set filetype=python
+au BufRead,BufNewFile *.tw set filetype=python
+
+" maybe i'll be able to see my code now, seems important
 "colorscheme gruvbox
 "set background=dark
 colorscheme acme
+
+" lol, but why is this needed?
+set backspace=indent,eol,start
+
 syntax off
 
-set backspace=2 " make backspace work like most other programs
+" myc fuzzy finding
+set rtp+=/usr/local/share/myc/vim
+nmap <leader>t :MYC<CR>
+
+let g:go_gopls_enabled = 0
+set nowrap
+
+" bc vim internally decided php doesn't get autoindenting. Come on
 autocmd FileType php setlocal autoindent
+
+" enable mouse support, like dragging to resize buffers
+" set mouse=a
+
+
+nnoremap <leader>r :JustTxtRun<CR>
+nnoremap . :JustTxtRun<CR>
+nnoremap <leader>c :JustTxtKill<CR>
