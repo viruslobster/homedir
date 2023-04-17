@@ -1,0 +1,56 @@
+# current unix timestamp
+date +%s
+
+# unix timestamp to standard date
+! date -d @1559238163
+Thu May 30 10:42:43 PDT 2019
+#~
+
+# english to standard date
+! date -d '11 days ago'
+Wed Sep 14 09:03:18 PDT 2022
+#~
+
+# english to unix timestamp
+! date -d '1 hour ago' +%s
+1671463733
+#~
+1660744366000
+1659557794595
+#!/usr/bin/python3
+from datetime import timedelta
+print(timedelta(seconds=999999))
+print(60 * 5)
+#$
+11 days, 13:46:39
+300
+#~
+  created_at: 2022-12-19T14:38:02.330000
+  created_at: 2022-12-19T16:35:43.576000
+  created_at: 2022-12-19T18:50:03.513000
+
+# time between dates
+#!
+t1=$(date -d '2022-12-19T14:38:02.330000' +%s)
+t2=$(date -d '2022-12-19T18:50:03.513000' +%s)
+let "t3=t2-t1"
+
+t4=$(date -d '2022-12-21T13:42:12.683000' +%s)
+t5=$(date -d '2022-12-21T13:58:20.778000' +%s)
+let "t6=t5-t4"
+
+echo "
+from datetime import timedelta
+d1 = timedelta(seconds=int($t3))
+d2 = timedelta(seconds=int($t6))
+print(d1)
+print(d2)
+print(d1 + d2)
+" | python3
+
+#$
+4:12:01
+0:16:08
+4:28:09
+#~
+

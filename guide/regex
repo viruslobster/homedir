@@ -1,0 +1,5 @@
+perl -nE 'say $1 if /tags: \[(\d+)\]/' sbids | pastry
+
+! echo 'string' | perl -nE 'say "{$1}" if /(P\d+):/'
+{P540070428}
+#~
