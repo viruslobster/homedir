@@ -1,16 +1,36 @@
 #!/bin/bash
 
-if [ "$1" = "-r" ];then
+RESET=0
+HOME=0
+while [ $# -gt 0 ]; do
+    case $1 in 
+        -r|--reset)
+            RESET=1
+            shift
+            ;;
+        --home)
+            HOME=1
+            shift
+            ;;
+        *)
+            echo "invalid arg $1"
+            exit 1
+            ;;
+    esac
+done
+
+if [ $RESET -eq 1 ]; then
     xrandr --output HDMI-2 --off
     xrandr --output DP-1 --off
-    sleep 5
-else
-    # config in MPK
-    # xrandr --output DP-1 --auto --above eDP-1 --output HDMI-2 --auto --left-of DP-1 --rotate left
-
-    # config in MPK/apt
-    # xrandr --output DP-1 --auto --above eDP-1 
-
-    # config for curved monitor
-    xrandr --output HDMI-2 --auto --output eDP-1 --left-of HDMI-2 --auto
+    exit
 fi
+
+if [ $HOME -eq 1 ]; then
+    xrandr --output HDMI-2 --auto --output eDP-1 --right-of HDMI-2 --auto
+    sleep 5 && nitrogen --restore
+    exit
+fi
+
+xrandr --output DP-1 --auto --mode 2560x1440 --output eDP-1 --right-of DP-1 --auto --output HDMI-2 --auto --left-of DP-1 --rotate right
+sleep 5 && nitrogen --restore
+
