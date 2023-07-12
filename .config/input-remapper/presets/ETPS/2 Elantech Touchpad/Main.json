@@ -1,0 +1,12 @@
+{
+    "mapping": {
+        "1,273,1": [
+            "key(Return)",
+            "keyboard"
+        ],
+        "1,274,1": [
+            "key(BTN_RIGHT)",
+            "mouse"
+        ]
+    }
+}
