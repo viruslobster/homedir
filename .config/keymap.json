@@ -1,0 +1,122 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "n": "vim::Down"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "e": "vim::Up"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "y": "vim::Left"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "o": "vim::Right"
+    }
+  },
+  {
+    "context": "((vim_mode == normal || vim_mode == helix_normal) && !menu)",
+    "bindings": {
+      "l": "vim::InsertLineBelow"
+    }
+  },
+  {
+    "bindings": {
+      "h": "vim::Yank"
+    }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "h": "vim::PushYank"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "h": "vim::VisualYank"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "k": "vim::NextWordEnd"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "ctrl-u": "pane::GoBack"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "ctrl-d": "pane::GoForward"
+    }
+  },
+  {
+    "context": "(VimControl || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-shift-y": "workspace::SwapPaneLeft"
+    }
+  },
+  {
+    "context": "(VimControl || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-y": "workspace::ActivatePaneLeft"
+    }
+  },
+  {
+    "context": "(VimControl || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-shift-o": "workspace::SwapPaneRight"
+    }
+  },
+  {
+    "context": "(VimControl || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-o": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "(VimControl || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-n": "workspace::ActivatePaneDown"
+    }
+  },
+  {
+    "context": "(VimControl || (!Editor && !Terminal))",
+    "bindings": {
+      "ctrl-e": "workspace::ActivatePaneUp"
+    }
+  }
+]
