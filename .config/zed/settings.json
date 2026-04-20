@@ -1,0 +1,99 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "git_panel": {
+    "tree_view": false,
+  },
+  "show_edit_predictions": false,
+  "ssh_connections": [
+    {
+      "host": "157.230.227.35",
+      "username": "webserver",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/var/www/public"],
+        },
+      ],
+      "nickname": "viruslobster-blog",
+    },
+  ],
+  "agent": {
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "profiles": {
+      "test": {
+        "name": "test",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {},
+      },
+    },
+    "default_profile": "write",
+    "default_model": {
+      "enable_thinking": true,
+      "provider": "zed.dev",
+      "model": "claude-opus-4-5",
+    },
+    "model_parameters": [],
+  },
+  "languages": {
+    "JavaScript": {
+      "format_on_save": "on",
+      "formatter": [
+        { "code_action": "source.organizeImports" },
+        {
+          "external": {
+            "command": "bunx",
+            "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"],
+          },
+        },
+      ],
+    },
+
+    "TypeScript": {
+      "format_on_save": "on",
+      "formatter": [
+        { "code_action": "source.organizeImports" },
+        {
+          "external": {
+            "command": "bunx",
+            "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"],
+          },
+        },
+      ],
+    },
+    "TSX": {
+      "format_on_save": "on",
+      "formatter": [
+        { "code_action": "source.organizeImports" },
+        {
+          "external": {
+            "command": "bunx",
+            "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"],
+          },
+        },
+      ],
+    },
+  },
+  "vim_mode": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+}
