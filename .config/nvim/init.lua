@@ -14,12 +14,11 @@ require('packer').startup(function(use)
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
   use 'nvim-lua/plenary.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
+  -- use 'nvim-treesitter/nvim-treesitter'
   use 'jose-elias-alvarez/null-ls.nvim'
-  use 'neovim/nvim-lspconfig'
+  use 'ziglang/zig.vim'
 
-  -- currently doesn't work because I don't have 0.9
-  -- use 'nvim-telescope/telescope.nvim'
+  use 'nvim-telescope/telescope.nvim'
 end)
 
 vim.cmd([[    
@@ -99,33 +98,59 @@ au BufRead,BufNewFile *.tw set filetype=python
 " maybe i'll be able to see my code now, seems important
 "colorscheme gruvbox
 "set background=dark
-colorscheme acme
+"colorscheme acme
 
 " lol, but why is this needed?
 set backspace=indent,eol,start
 
-syntax off
+syntax on
 nnoremap <leader>r :JustTxtRun<CR>
 nnoremap . :JustTxtRun<CR>
 nnoremap <leader>c :JustTxtKill<CR>
+
+nnoremap <leader>t :Telescope find_files<CR>
+nnoremap <leader>g :Telescope live_grep<CR>
+
+" escape from terminal mode with escape
+tnoremap <Esc> <C-\><C-n>
+
+" Jump to next error
+"nnoremap <C-e> :lua vim.diagnostic.goto_next( {severity=vim.diagnostic.severity.ERROR, wrap = true} )<CR>
 ]])
 vim.o.signcolumn = 'yes'            -- Enable the signcolumn
-vim.o.signcolumn_width = 2          -- Set the desired width
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require('lspconfig')
-lspconfig.pyright.setup {
-  capabilities = capabilities,
-}
-lspconfig.rust_analyzer.setup {
-  capabilities = capabilities,
-}
-lspconfig.gopls.setup{
-  capabilities = capabilities,
-}
-lspconfig.tsserver.setup {
-  capabilities = capabilities,
-}
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local lspconfig = require('lspconfig')
+vim.lsp.enable('pyright')
+-- lspconfig.pyright.setup {
+-- capabilities = capabilities,
+-- }
+vim.lsp.enable('rust_analyzer')
+-- lspconfig.rust_analyzer.setup {
+-- capabilities = capabilities,
+-- }
+vim.lsp.enable("gopls")
+-- lspconfig.gopls.setup{
+-- capabilities = capabilities,
+-- }
+vim.lsp.enable("zls")
+-- lspconfig.zls.setup {
+--}
+-- don't show parse errors in a separate window
+vim.g.zig_fmt_parse_errors = 0
+-- disable format-on-save from `ziglang/zig.vim`
+vim.g.zig_fmt_autosave = 0
+-- enable  format-on-save from nvim-lspconfig + ZLS
+--
+-- Formatting with ZLS matches `zig fmt`.
+-- The Zig FAQ answers some questions about `zig fmt`:
+-- https://github.com/ziglang/zig/wiki/FAQ
+vim.api.nvim_create_autocmd('BufWritePre',{
+  pattern = {"*.zig", "*.zon"},
+  callback = function(ev)
+    vim.lsp.buf.format()
+  end
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -203,4 +228,16 @@ cmp.setup {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
     },
+}
+
+local actions = require('telescope.actions')
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-e>"] = actions.move_selection_previous,
+        ["C-n>"] = actions.move_selection_next,
+      }
+    }
+  }
 }
