@@ -1,0 +1,42 @@
+ls
+config nu
+cd src/permitflow/
+exit
+cd src/permitflow/
+exit
+nu
+exit
+cd src/permitflow/
+exit
+ls
+exit
+cd
+ls
+exit
+ls
+cd
+cd src/permitflow/
+ls
+clear
+ls
+cd
+ls
+clear
+ls
+ls -la
+clear
+exit
+nu
+exit
+cd src/permitflow/
+exit
+ls
+ls -la
+clear
+ls -a
+cd .config/
+ls
+tree
+^ls
+clear
+ls
