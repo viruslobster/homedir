@@ -24,6 +24,11 @@ $env.EDITOR = "nvim"
 $env.PF_EXPERIMENTAL_VM = "1"
 $env.XDG_CONFIG_HOME = $"($env.HOME)/.config"
 
+# Embedded Nushell may inherit PATH as a string; split it so prepend keeps each directory separate.
+if ($env.PATH | describe) == 'string' {
+    $env.PATH = ($env.PATH | split row (char esep))
+}
+
 $env.PATH = ($env.PATH | prepend [
     $"($env.JAVA_HOME)/bin"
     $"($env.ANDROID_HOME)/platform-tools"
@@ -35,9 +40,20 @@ $env.PATH = ($env.PATH | prepend [
     $"($env.HOME)/.local/bin"
     "/opt/homebrew/share/google-cloud-sdk/bin"
     "/opt/homebrew/opt/libpq/bin"
+    "/Users/michaelstevens/bin"
 ])
 
 if not (which fnm | is-empty) {
     ^fnm env --json | from json | load-env
     $env.PATH = ($env.PATH | prepend $"($env.FNM_MULTISHELL_PATH)/bin")
+}
+
+alias vim = nvim
+alias sl = ls
+alias zed = /Applications/Zed.app/Contents/MacOS/cli
+
+
+# Config for when running inside of Pandelume
+if $env.PANDELUME == "1" {
+  $env.JJ_NO_PAGER = "1"
 }

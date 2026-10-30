@@ -63,10 +63,6 @@ let fish_completer = {|place|
 
 $env.config.completions.external.completer = $fish_completer
 
-alias vim = nvim
-alias sl = ls
-alias zed = /Applications/Zed.app/Contents/MacOS/cli
-
 # fnm and direnv update the environment when changing directories.
 $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD? | default [])
 $env.config.hooks.env_change.PWD ++= [
